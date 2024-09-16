@@ -1,0 +1,29 @@
+﻿@model WeatherResponse
+
+<h2>Weather Information</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p style="color:red">@ViewBag.ErrorMessage</p>
+}
+
+<form method="post">
+    <input type="text" name="city" placeholder="Enter City Name" required />
+    <button type="submit">Get Weather</button>
+</form>
+
+
+@if (Model != null)
+{
+    <div>
+        <h2>Weather in @Model.Location.Name</h2>
+        <p>Temperature: @Model.Current.Temp_C &deg;C</p>
+        <p>Condition: @Model.Current.Condition.Text</p>
+        <img src="@Model.Current.Condition.Icon" alt="Weather Icon"/>
+        <p>Humidity: @Model.Current.Humidity %</p>
+    </div>
+}
+else
+{
+    <p>No data available for the specified city.</p>
+}
